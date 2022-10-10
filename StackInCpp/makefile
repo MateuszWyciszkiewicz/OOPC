@@ -1,8 +1,8 @@
-headers = 
+headers = stack.h
 
 sources = testStack.cpp stack.cpp
 
-executable = testStack.cpp
+executable = testStack
 
 $(executable): $(headers) $(sources)
 	g++ -g -Wall -pedantic $(sources) -o $(executable)
