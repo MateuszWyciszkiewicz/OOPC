@@ -6,7 +6,7 @@ using namespace std;
 
 Stack::Stack()
 {
-    cout << "called constructor for stack" <<endl;
+    cout << "called constructor for stack\n" <<endl;
 	this->top = 0;
 	this->size = INITIAL_SIZE;
 	this->array = (int*)malloc(this->size * sizeof(int));
@@ -14,7 +14,7 @@ Stack::Stack()
 
 Stack::~Stack()
 {
-	cout << "called destructor for stack" << endl;
+	cout << "called destructor for stack\n" << endl;
 	free(this->array);
 }
 
@@ -55,7 +55,7 @@ int Stack::pop(){
 		abort();
 		} else {
 			this -> top--;
-			return this -> array[this -> top +1];
+			return this -> array[this -> top];
 			}
 	}
 
