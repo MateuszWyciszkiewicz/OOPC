@@ -6,6 +6,7 @@ using namespace std;
 
 Stack::Stack()
 {
+    cout << "called constructor for stack" <<endl;
 	this->top = 0;
 	this->size = INITIAL_SIZE;
 	this->array = (int*)malloc(this->size * sizeof(int));
