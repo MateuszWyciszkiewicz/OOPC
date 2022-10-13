@@ -23,7 +23,7 @@ int main()
 	testOverlimitPush(s2);
 	testIsFull(s1);
 	testIsFull(s2);
-	testPushOverlimit(s1);
+	//testPushOverlimit(s1);
 	return 0;
 }
 
