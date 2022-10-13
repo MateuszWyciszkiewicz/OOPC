@@ -10,6 +10,8 @@ class Stack {
 	void resize();
 
   public:
+    size_t getSize();
+    size_t getTop();
 	bool isFull();
 	bool isEmpty();
 	void push(int);

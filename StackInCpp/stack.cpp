@@ -31,9 +31,10 @@ bool Stack::isEmpty()
 void Stack::resize()
 {
 	size_t newSize = (this->size) * 2;
-	int* newArray = (int*)realloc(this->array, newSize);
+	int* newArray = (int*)realloc(this->array, newSize*sizeof(int));
 	if (newArray) {
 		this->array = newArray;
+        this -> size = newSize;
 	}
 	else {
 		cout << "error during stack reallocation" << endl;
@@ -59,3 +60,10 @@ int Stack::pop(){
 			}
 	}
 
+size_t Stack::getSize(){
+    return this -> size;
+    }
+
+size_t Stack::getTop(){
+    return this -> top;
+    }
