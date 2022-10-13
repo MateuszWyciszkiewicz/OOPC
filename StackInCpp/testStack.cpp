@@ -23,7 +23,7 @@ int main()
 	testOverlimitPush(s2);
 	testIsFull(s1);
 	testIsFull(s2);
-	// testPushOverlimit(s1);
+	testPushOverlimit(s1);
 	return 0;
 }
 
@@ -84,10 +84,10 @@ void testOverlimitPush(Stack& stack)
 
 void testPushOverlimit(Stack& stack)
 {
-	cout << "Testing overlimit push. Program should receive error after this "
+	cout << "Testing overlimit pop. Program should receive error after this "
 			"function is invoked:"
 		 << endl;
-	for (int i = 0; i < INITIAL_SIZE * 2; i++) {
+	for (size_t i = 0; i < stack.getSize(); i++) {
 		stack.pop();
 	}
 }
