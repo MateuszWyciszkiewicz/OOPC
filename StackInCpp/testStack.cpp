@@ -6,7 +6,7 @@ void testIsEmpty(Stack& stack);
 void testRegularPush(Stack& stack);
 void testRegularPop(Stack& stack);
 void testIsFull(Stack& stack);
-void testPushOverlimit(Stack& stack);
+void testPopOverlimit(Stack& stack);
 void testOverlimitPush(Stack& stack);
 
 int main()
@@ -23,7 +23,7 @@ int main()
 	testOverlimitPush(s2);
 	testIsFull(s1);
 	testIsFull(s2);
-	//testPushOverlimit(s1);
+	//testPopOverlimit(s1);
 	return 0;
 }
 
@@ -82,7 +82,7 @@ void testOverlimitPush(Stack& stack)
 	cout << "Overlimit push test successful, init size:" << INITIAL_SIZE<<" current size: "<<stack.getSize() <<"\n\n";
 }
 
-void testPushOverlimit(Stack& stack)
+void testPopOverlimit(Stack& stack)
 {
 	cout << "Testing overlimit pop. Program should receive error after this "
 			"function is invoked:"
