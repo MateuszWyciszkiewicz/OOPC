@@ -16,7 +16,9 @@ class Stack {
 	bool isEmpty();
 	void push(int);
 	int pop();
+    void printStack();
     Stack(const Stack& stack);
+    Stack& operator=(const Stack& stack);
 	Stack();
 	~Stack();
 };

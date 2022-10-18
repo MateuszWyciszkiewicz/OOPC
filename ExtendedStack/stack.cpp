@@ -6,10 +6,14 @@ using namespace std;
 
 Stack::Stack()
 {
-    cout << "called constructor for stack\n" <<endl;
+	cout << "called constructor for stack\n" << endl;
 	this->top = 0;
 	this->size = INITIAL_SIZE;
 	this->array = (int*)malloc(this->size * sizeof(int));
+	if (this->array == NULL) {
+		cout << "Error during stack allocation" << endl;
+		abort();
+	}
 }
 
 Stack::~Stack()
@@ -18,11 +22,31 @@ Stack::~Stack()
 	free(this->array);
 }
 
-Stack::Stack(const Stack& stack){
+Stack::Stack(const Stack& stack)
+{
+	this->size = stack.size;
+	this->array = (int*)malloc(this->size * sizeof(int));
+	if (this->array == NULL) {
+		cout << "error during stack allocation" << endl;
+		abort();
+	}
+	copy(stack.array, stack.array + stack.size, this->array);
+	this->top = stack.top;
+}
+
+Stack& Stack::operator=(const Stack& stack)
+{
+	if (this == &stack) {
+		return *this;
+	}
+	if (this->size < stack.size) {
+		free(this->array);
+		this->array = (int*)malloc(stack.size * sizeof(int));
+	}
+	copy(stack.array, stack.array + stack.size, this->array);
     this -> top = stack.top;
-    this -> size = stack.size;
-    this -> array = stack.array;
-    }
+	return *this;
+}
 
 bool Stack::isFull()
 {
@@ -34,13 +58,26 @@ bool Stack::isEmpty()
 	return (this->top == 0);
 }
 
+void Stack::printStack()
+{
+	cout << "Printing stack" << endl;
+	if (isEmpty()) {
+		cout << "Stack empty" << endl;
+	}
+	else {
+		for (int i = this->top - 1; i >= 0; i--) {
+			cout << this->array[i] << endl;
+		}
+	}
+	cout << "---------------" << endl;
+}
 void Stack::resize()
 {
 	size_t newSize = (this->size) * 2;
-	int* newArray = (int*)realloc(this->array, newSize*sizeof(int));
+	int* newArray = (int*)realloc(this->array, newSize * sizeof(int));
 	if (newArray) {
 		this->array = newArray;
-        this -> size = newSize;
+		this->size = newSize;
 	}
 	else {
 		cout << "error during stack reallocation" << endl;
@@ -48,28 +85,33 @@ void Stack::resize()
 	}
 }
 
-void Stack::push(int number){
-	if(isFull()){
+void Stack::push(int number)
+{
+	if (isFull()) {
 		resize();
-		}
-	this -> array[this -> top] = number;
-	this -> top++;	
 	}
-	
-int Stack::pop(){
-	if(isEmpty()){
-		cout<<"poping from empty stack"<<endl;
+	this->array[this->top] = number;
+	this->top++;
+}
+
+int Stack::pop()
+{
+	if (isEmpty()) {
+		cout << "poping from empty stack" << endl;
 		abort();
-		} else {
-			this -> top--;
-			return this -> array[this -> top];
-			}
 	}
+	else {
+		this->top--;
+		return this->array[this->top];
+	}
+}
 
-size_t Stack::getSize(){
-    return this -> size;
-    }
+size_t Stack::getSize()
+{
+	return this->size;
+}
 
-size_t Stack::getTop(){
-    return this -> top;
-    }
+size_t Stack::getTop()
+{
+	return this->top;
+}
