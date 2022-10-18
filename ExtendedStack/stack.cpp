@@ -18,6 +18,12 @@ Stack::~Stack()
 	free(this->array);
 }
 
+Stack::Stack(const Stack& stack){
+    this -> top = stack.top;
+    this -> size = stack.size;
+    this -> array = stack.array;
+    }
+
 bool Stack::isFull()
 {
 	return (this->top == this->size - 1);
