@@ -2,14 +2,6 @@
 
 using namespace std;
 
-void testIsEmpty(Stack& stack);
-void testRegularPush(Stack& stack);
-void testRegularPop(Stack& stack);
-void testIsFull(Stack& stack);
-void testPopOverlimit(Stack& stack);
-void testOverlimitPush(Stack& stack);
-void generalTests(Stack& s1, Stack& s2);
-
 void printResults(Stack& modelStack, Stack& moddedStack);
 void populateTwoStacks(Stack& larger, Stack& smaller);
 void copyTest();
@@ -25,9 +17,6 @@ void gdbTest();
 
 int main()
 {
-	// Stack s1;
-	// Stack s2;
-	// generalTests(s1, s2);
     testCopyAndAssignment();
     gdbTest();
 	return 0;
@@ -41,20 +30,6 @@ void testCopyAndAssignment(){
 	assigningOneEmpty();
 	assignToItself();
     }
-void generalTests(Stack& s1, Stack& s2)
-{
-	testIsEmpty(s1);
-	testIsEmpty(s2);
-	testRegularPush(s1);
-	testRegularPush(s2);
-	testRegularPop(s1);
-	testRegularPop(s2);
-	testOverlimitPush(s1);
-	testOverlimitPush(s2);
-	testIsFull(s1);
-	testIsFull(s2);
-	testPopOverlimit(s1);
-}
 
 void copyTest()
 {
@@ -169,8 +144,8 @@ void gdbTest()
 	s4.push(10);
 	s4 = s1;
 
-	runFunction1(s1); // Stack object is passed by value.
-	runFunction2(s1); // Stack object is passed by reference.
+	runFunction1(s1); 
+	runFunction2(s1);
 }
 
 void runFunction1(Stack stack){
@@ -180,68 +155,3 @@ void runFunction2(Stack& stack){
     stack.printStack();
     }
 
-void testIsEmpty(Stack& stack)
-{
-	cout << "Testing method isEmpty" << endl;
-	if (stack.isEmpty()) {
-		cout << "stack empty. Test successfull\n" << endl;
-	}
-	else {
-		cout << "Stack not empty, test failed\n" << endl;
-	}
-}
-
-void testRegularPush(Stack& stack)
-{
-	cout << "Testing method push" << endl;
-	int num = 5;
-	stack.push(num);
-	cout << "Push function test successful\n\n" << endl;
-}
-
-void testRegularPop(Stack& stack)
-{
-	cout << "Testing method pop" << endl;
-	int num = 5;
-	int result = stack.pop();
-	if (result == num) {
-		cout << "Pop function test successful\n\n" << endl;
-	}
-	else {
-		cout << "Pop function test failed\n\n" << endl;
-	}
-}
-
-void testIsFull(Stack& stack)
-{
-	cout << "Testing isFull function" << endl;
-	for (int i = 0; stack.getTop() < stack.getSize() - 1; i++) {
-		stack.push(i);
-	}
-	if (stack.isFull()) {
-		cout << "Stack full, test successful\n\n";
-	}
-	else {
-		cout << "Stack not full, test failed\n\n";
-	}
-}
-
-void testOverlimitPush(Stack& stack)
-{
-	cout << "Testing push function over stack limit" << endl;
-	for (int i = 0; i < INITIAL_SIZE * 2.; i++) {
-		stack.push(i);
-	}
-	cout << "Overlimit push test successful, init size:" << INITIAL_SIZE
-		 << " current size: " << stack.getSize() << "\n\n";
-}
-
-void testPopOverlimit(Stack& stack)
-{
-	cout << "Testing overlimit pop. Program should receive error after this "
-			"function is invoked:"
-		 << endl;
-	for (size_t i = 0; i < stack.getSize(); i++) {
-		stack.pop();
-	}
-}
