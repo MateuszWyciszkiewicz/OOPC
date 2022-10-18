@@ -6,7 +6,6 @@ using namespace std;
 
 Stack::Stack()
 {
-	cout << "called constructor for stack\n" << endl;
 	this->top = 0;
 	this->size = INITIAL_SIZE;
 	this->array = (int*)malloc(this->size * sizeof(int));
@@ -18,7 +17,6 @@ Stack::Stack()
 
 Stack::~Stack()
 {
-	cout << "called destructor for stack\n" << endl;
 	free(this->array);
 }
 
@@ -39,7 +37,7 @@ Stack& Stack::operator=(const Stack& stack)
 	if (this == &stack) {
 		return *this;
 	}
-	if (this->size < stack.size) {
+	if (this->size < stack.top) {
 		free(this->array);
 		this->array = (int*)malloc(stack.size * sizeof(int));
 	}
@@ -60,16 +58,15 @@ bool Stack::isEmpty()
 
 void Stack::printStack()
 {
-	cout << "Printing stack" << endl;
 	if (isEmpty()) {
 		cout << "Stack empty" << endl;
 	}
 	else {
 		for (int i = this->top - 1; i >= 0; i--) {
-			cout << this->array[i] << endl;
+			cout << this->array[i] << "  ";
 		}
+        cout << endl;
 	}
-	cout << "---------------" << endl;
 }
 void Stack::resize()
 {
