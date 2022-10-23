@@ -103,12 +103,3 @@ int Stack::pop()
 	}
 }
 
-size_t Stack::getSize()
-{
-	return this->size;
-}
-
-size_t Stack::getTop()
-{
-	return this->top;
-}
