@@ -39,9 +39,14 @@ Stack& Stack::operator=(const Stack& stack)
 	}
 	if (this->size < stack.top) {
 		free(this->array);
-		this->array = (int*)malloc(stack.size * sizeof(int));
+        this -> size = stack.size;
+		this->array = (int*)malloc(this -> size * sizeof(int));
+        if (this->array == NULL) {
+		cout << "error during stack allocation" << endl;
+		abort();
 	}
-	copy(stack.array, stack.array + stack.size, this->array);
+	}
+	copy(stack.array, stack.array + stack.top, this->array);
     this -> top = stack.top;
 	return *this;
 }

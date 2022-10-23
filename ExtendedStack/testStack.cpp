@@ -18,7 +18,7 @@ void gdbTest();
 int main()
 {
     testCopyAndAssignment();
-    gdbTest();
+   // gdbTest();
 	return 0;
 }
 
@@ -45,7 +45,7 @@ void copyTest()
 
 void populateTwoStacks(Stack& larger, Stack& smaller)
 {
-	for (int i = 0; i < INITIAL_SIZE * 2; i++) {
+	for (int i = 0; i < INITIAL_SIZE  + 2; i++) {
 		larger.push(i);
 	}
 	for (int i = 0; i < INITIAL_SIZE - 1; i++) {
