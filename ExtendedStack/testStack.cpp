@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void printResults(Stack& modelStack, Stack& moddedStack);
+void printResults(const Stack& modelStack, const Stack& moddedStack);
 void populateTwoStacks(Stack& larger, Stack& smaller);
 void copyTest();
 void assignLargerToSmaller();
@@ -53,7 +53,7 @@ void populateTwoStacks(Stack& larger, Stack& smaller)
 	}
 }
 
-void printResults(Stack& modelStack, Stack& moddedStack)
+void printResults(const Stack& modelStack, const Stack& moddedStack)
 {
 	cout << "Model stack: " << endl;
 	modelStack.printStack();

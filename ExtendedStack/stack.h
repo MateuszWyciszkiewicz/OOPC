@@ -11,12 +11,13 @@ class Stack {
 
   public:
 	bool isFull();
-	bool isEmpty();
+	bool isEmpty() const;
 	void push(int);
 	int pop();
-    void printStack();
+    void printStack() const;
     Stack(const Stack& stack);
     Stack& operator=(const Stack& stack);
 	Stack();
+    void newStack(size_t newsize);
 	~Stack();
 };
