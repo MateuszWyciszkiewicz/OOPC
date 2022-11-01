@@ -8,9 +8,10 @@ int main(){
     Complex c2(3, 4);
     //c1 = c2;
     Complex c3(c1);
-    cout << c3.real <<"dupa"<< c3.imag << endl;
+    c1/=c2;
+    cout << c1.real <<" "<< c1.imag << endl;
     if(c1 != c3){
-        cout << "dupa22222" << endl;
+        cout << "true" << endl;
         }
     return 0;
     }

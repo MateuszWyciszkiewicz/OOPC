@@ -11,6 +11,7 @@ class Complex {
     Complex& operator+=(const Complex&);
     Complex& operator-=(const Complex&);
     Complex& operator*=(const Complex&);
+    Complex& operator/=(const Complex&);
 };
 
 bool operator==(Complex, Complex);
