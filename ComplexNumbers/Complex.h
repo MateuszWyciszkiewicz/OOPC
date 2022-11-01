@@ -14,5 +14,7 @@ class Complex {
     Complex& operator/=(const Complex&);
 };
 
-bool operator==(Complex, Complex);
-bool operator!=(Complex, Complex);
+bool operator==(const Complex, const Complex);
+bool operator!=(const Complex, const Complex);
+Complex operator+(Complex, Complex);
+Complex operator-(Complex, Complex);

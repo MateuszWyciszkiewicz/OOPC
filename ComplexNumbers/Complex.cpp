@@ -1,5 +1,8 @@
 #include "Complex.h"
 #include <cmath>
+
+Complex::Complex() : real(0), imag(0) {}
+
 Complex::Complex(double real, double imag)
 {
 	this->real = real;
@@ -63,7 +66,7 @@ Complex& Complex::operator /=(const Complex& source){
     return *this;
     }
 
-bool operator==(Complex c1, Complex c2)
+bool operator==(const Complex c1, const Complex c2)
 {
 	if (c1.real == c2.real && c1.imag == c2.imag) {
 		return true;
@@ -71,10 +74,22 @@ bool operator==(Complex c1, Complex c2)
 	return false;
 }
 
-bool operator!=(Complex c1, Complex c2)
+bool operator!=(const Complex c1, const Complex c2)
 {
 	if (c1.real != c2.real && c1.imag != c2.imag) {
 		return true;
 	}
 	return false;
 }
+
+Complex operator +(Complex c1, Complex c2){
+    c1.real += c2.real;
+    c1.imag += c2.imag;
+    return c1;
+    }
+
+Complex operator - (Complex c1, Complex c2){
+    c1.real -= c2.real;
+    c1.imag -= c2.imag;
+    return c1; 
+    }
