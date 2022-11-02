@@ -13,13 +13,17 @@ void compoundDivisionTest();
 void comparisonsOperatorsTests();
 void equalityOperatorTest();
 void inequalityOperatorTest();
+void regularAdditionTest();
+void regularSubstractionTest();
 
 int main()
 {
 	copyConstructorTest();
 	assignmentOperatorTest();
 	compoundOperatorTests();
-    comparisonsOperatorsTests();
+	comparisonsOperatorsTests();
+	regularAdditionTest();
+	regularSubstractionTest();
 	return 0;
 }
 
@@ -89,7 +93,7 @@ void compoundDivisionTest()
 void comparisonsOperatorsTests()
 {
 	equalityOperatorTest();
-    inequalityOperatorTest();
+	inequalityOperatorTest();
 }
 
 void equalityOperatorTest()
@@ -105,8 +109,9 @@ void equalityOperatorTest()
 	}
 }
 
-void inequalityOperatorTest(){
-    Complex c1(1, 1);
+void inequalityOperatorTest()
+{
+	Complex c1(1, 1);
 	Complex c2(2, 2);
 
 	if (c1 != c2) {
@@ -115,7 +120,7 @@ void inequalityOperatorTest(){
 	else {
 		cout << "inequality operator test failed" << endl;
 	}
-    }
+}
 void copyConstructorTest()
 {
 	Complex c1(1, 1);
@@ -138,5 +143,50 @@ void assignmentOperatorTest()
 	}
 	else {
 		cout << "assignment operator test failed" << endl;
+	}
+}
+
+void regularAdditionTest()
+{
+	Complex c1(1, 1);
+	Complex c2(0, 1);
+	Complex c3(2, 2);
+	double num = 2;
+	Complex result1(3, 3);
+	Complex result2(1, 2);
+	Complex result3(3, 1);
+	Complex try1 = c1 + c3;
+	Complex try2 = c1 + c2;
+	Complex try3 = num + c1;
+	Complex try4 = c1 + num;
+	if (try1 == result1 && try2 == result2 && try3 == result3 &&
+		try4 == result3) {
+		cout << "regular addition test successful" << endl;
+	}
+	else {
+		cout << "regular addition test successful" << endl;
+	}
+}
+
+void regularSubstractionTest()
+{
+	Complex c1(1, 1);
+	Complex c2(0, 1);
+	Complex c3(2, 2);
+	double num = 2;
+	Complex result1(-1, -1);
+	Complex result2(1, 0);
+    Complex result3(1, -1);
+	Complex result4(-1, 1);
+	Complex try1 = c1 - c3;
+	Complex try2 = c1 - c2;
+	Complex try3 = num - c1;
+	Complex try4 = c1 - num;
+	if (try1 == result1 && try2 == result2 && try3 == result3 &&
+		try4 == result4) {
+		cout << "regular substraction test successful" << endl;
+	}
+	else {
+		cout << "regular substraction test successful" << endl;
 	}
 }
