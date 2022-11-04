@@ -1,5 +1,5 @@
 #include "Complex.h"
-#include <iostream>
+
 
 using namespace std;
 
@@ -15,6 +15,7 @@ void equalityOperatorTest();
 void inequalityOperatorTest();
 void regularAdditionTest();
 void regularSubstractionTest();
+void testOutStream();
 
 int main()
 {
@@ -24,6 +25,7 @@ int main()
 	comparisonsOperatorsTests();
 	regularAdditionTest();
 	regularSubstractionTest();
+    testOutStream();
 	return 0;
 }
 
@@ -190,3 +192,15 @@ void regularSubstractionTest()
 		cout << "regular substraction test successful" << endl;
 	}
 }
+
+void testOutStream(){
+    Complex c1;
+    Complex c2(1, 0);
+    Complex c3(0, 1);
+    Complex c4(2, -2);
+    cout << c1 << endl;
+    cout << c2 << endl;
+    cout << c3 << endl;
+    cout << c4 << endl;
+    
+    }
