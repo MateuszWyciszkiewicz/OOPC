@@ -1,5 +1,4 @@
 #include "Complex.h"
-#include <cmath>
 
 Complex::Complex() : real(0), imag(0) {}
 
@@ -97,6 +96,16 @@ Complex operator-(Complex c1, Complex c2)
 	return c1;
 }
 
+Complex operator*(Complex c1, Complex c2){
+    c1 *= c2;
+    return c1;
+    }
+    
+Complex operator/(Complex c1, Complex c2){
+    c1 /= c2;
+    return c1;
+    }
+
 ostream& operator<<(ostream& out, const Complex c1)
 {   if(c1.real != 0){
 	out << c1.real;
@@ -113,4 +122,21 @@ ostream& operator<<(ostream& out, const Complex c1)
     out<<fabs(c1.imag);
     out<<"i";
     return out;
+}
+
+double Complex::amplitude()
+{
+	return(sqrt(pow(this->real, 2) + pow(this->imag, 2)));
+}
+
+double Complex::phase()
+{
+    if(this->imag != 0 || this->real > 0){
+        return(2*atan(this->imag / (this->amplitude() + this->real)));
+    }else if(this->real < 0 && this->imag == 0){
+        return M_PI;
+    }else{
+        cout << "Cannot calculate phase for 0 + 0i" << endl;
+        return 0;
+    }
 }
