@@ -33,8 +33,8 @@ int main()
 	regularDivisionTest();
 	testAmplitude();
 	testPhase();
+    specialCasesTest();
 	testOutStream();
-	specialCasesTest();
 	return 0;
 }
 
@@ -258,8 +258,9 @@ void testOutStream()
 
 void testAmplitude()
 {
-	Complex c(3, 4);
-	if (c.amplitude() == 5) {
+	Complex c1(3, 4);
+    Complex c2(3, 4);
+	if (c1.amplitude() == 5 && c2.amplitude() == 5) {
 		cout << "amplitude test successful" << endl;
 	}
 	else {
@@ -270,9 +271,12 @@ void testAmplitude()
 void testPhase()
 {
 	Complex c1(3, 4);
+    Complex c2(-3, 0);
+    Complex c3(-3, -4);
+    Complex c4(-3, 4);
 	double num1 = 3;
 	double num2 = 4;
-	if (c1.phase() == (2 * atan(num2 / (5.0 + num1)))) {
+	if (c1.phase() == (2 * atan(num2 / (5.0 + num1))) && c2.phase() == M_PI && c3.phase() == (2 * atan(-4 / (5.0 + -3)))) {
 		cout << "phase test successful" << endl;
 	}
 	else {
@@ -294,6 +298,6 @@ void specialCasesTest()
 	5 * b;
 	c == 3.5; 
 	3.5 == c; 
-    cout << "special cases test passed" << endl;
+    cout << "special cases test successful" << endl;
 }
 

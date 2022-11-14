@@ -66,7 +66,7 @@ Complex& Complex::operator/=(const Complex& source)
 	return *this;
 }
 
-bool operator==(const Complex c1, const Complex c2)
+bool operator==(const Complex& c1, const Complex& c2)
 {
 	if (c1.real == c2.real && c1.imag == c2.imag) {
 		return true;
@@ -74,7 +74,7 @@ bool operator==(const Complex c1, const Complex c2)
 	return false;
 }
 
-bool operator!=(const Complex c1, const Complex c2)
+bool operator!=(const Complex& c1, const Complex& c2)
 {
 	if (c1.real != c2.real && c1.imag != c2.imag) {
 		return true;
@@ -106,7 +106,7 @@ Complex operator/(Complex c1, Complex c2){
     return c1;
     }
 
-ostream& operator<<(ostream& out, const Complex c1)
+ostream& operator<<(ostream& out, const Complex& c1)
 {   if(c1.real != 0){
 	out << c1.real;
     }
@@ -124,19 +124,19 @@ ostream& operator<<(ostream& out, const Complex c1)
     return out;
 }
 
-double Complex::amplitude()
+double Complex::amplitude() const
 {
 	return(sqrt(pow(this->real, 2) + pow(this->imag, 2)));
 }
 
-double Complex::phase()
+double Complex::phase() const
 {
     if(this->imag != 0 || this->real > 0){
         return(2*atan(this->imag / (this->amplitude() + this->real)));
     }else if(this->real < 0 && this->imag == 0){
         return M_PI;
     }else{
-        cout << "Cannot calculate phase for 0 + 0i" << endl;
+        cout << "failed to calculate phase" << endl;
         return 0;
     }
 }
