@@ -118,14 +118,13 @@ ostream& operator<<(ostream& out, const Poly& poly)
 	for (const Poly::node& currentNode : poly.polynomial) {
 		if (currentNode.coef > 0 && !first) {
 			out << " + ";
-			empty = false;
 		}
 		else if (currentNode.coef < 0) {
 			out << " - ";
-			empty = false;
 		}
 		if (currentNode.coef != 0) {
 			first = false;
+            empty = false;
 			if (currentNode.coef != 1 && currentNode.coef != -1) {
 				out << fabs(currentNode.coef);
 			}
