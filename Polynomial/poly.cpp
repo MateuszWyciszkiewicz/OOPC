@@ -65,7 +65,7 @@ Poly operator+(const Poly& p1, const Poly& p2)
 {
 	Poly result;
 	unsigned int iter1 = 0, iter2 = 0;
-	while (iter2 < p2.polynomial.size() && iter1 < p1.polynomial.size()) {
+	while (iter2 < p2.polynomial.size() || iter1 < p1.polynomial.size()) {
 		if (p1.polynomial[iter1].power > p2.polynomial[iter2].power) {
 			result.polynomial.push_back(p1.polynomial[iter1]);
 			iter1++;
@@ -82,14 +82,6 @@ Poly operator+(const Poly& p1, const Poly& p2)
 			iter2++;
 		}
 	}
-	while (iter1 < p1.polynomial.size()) {
-		result.polynomial.push_back(p1.polynomial[iter1]);
-		iter1++;
-	}
-	while (iter2 < p2.polynomial.size()) {
-		result.polynomial.push_back(p2.polynomial[iter2]);
-		iter2++;
-	}
 	return result;
 }
 
@@ -97,7 +89,7 @@ Poly operator-(const Poly& p1, const Poly& p2)
 {
 	Poly result;
 	unsigned long iter1 = 0, iter2 = 0;
-	while (iter2 < p2.polynomial.size() && iter1 < p1.polynomial.size()) {
+	while (iter2 < p2.polynomial.size() || iter1 < p1.polynomial.size()) {
 		if (p1.polynomial[iter1].power > p2.polynomial[iter2].power) {
 			result.polynomial.push_back(p1.polynomial[iter1]);
 			iter1++;
@@ -115,16 +107,6 @@ Poly operator-(const Poly& p1, const Poly& p2)
 			iter1++;
 			iter2++;
 		}
-	}
-	while (iter1 < p1.polynomial.size()) {
-		result.polynomial.push_back(p1.polynomial[iter1]);
-		iter1++;
-	}
-	while (iter2 < p2.polynomial.size()) {
-		result.polynomial = 
-            pushNode(result.polynomial, -p2.polynomial[iter2].coef,
-					 p2.polynomial[iter2].power);
-		iter2++;
 	}
 	return result;
 }
