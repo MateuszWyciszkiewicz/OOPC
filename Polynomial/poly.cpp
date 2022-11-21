@@ -149,14 +149,8 @@ Poly operator*(const Poly& p1, const Poly& p2)
 	Poly result;
 	for (unsigned int i = 0; i < p1.polynomial.size(); i++) {
 		for (unsigned int j = 0; j < p2.polynomial.size(); j++) {
-			if (result[p2.polynomial[j].power + p1.polynomial[i].power] != 0) {
 				result[p2.polynomial[j].power + p1.polynomial[i].power] +=
 					p2.polynomial[j].coef * p1.polynomial[i].coef;
-			}
-			else {
-				result[p2.polynomial[j].power + p1.polynomial[i].power] =
-					p2.polynomial[j].coef * p1.polynomial[i].coef;
-			}
 		}
 	}
 	return result;
