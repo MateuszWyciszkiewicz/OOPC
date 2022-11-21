@@ -139,7 +139,6 @@ ostream& operator<<(ostream& out, const Poly& poly)
 		}
 	}
 	if (empty) {
-		out.clear();
 		out << "0";
 	}
 	return out;
