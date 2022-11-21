@@ -1,15 +1,13 @@
 #include "poly.h"
 
-Poly::Poly() {}
-
 Poly::Poly(double coef)
 {
-	struct Poly::node newNode;
+	Poly::node newNode;
 	newNode.coef = coef;
 	polynomial.push_back(newNode);
 }
 
-vector<Poly::node>& pushNode(vector<Poly::node>& vect, double coef, int power)
+vector<Poly::node>& Poly::pushNode(vector<Poly::node>& vect, double coef, int power)
 {
 	Poly::node newNode;
 	newNode.power = power;
@@ -20,7 +18,7 @@ vector<Poly::node>& pushNode(vector<Poly::node>& vect, double coef, int power)
 
 double& Poly::operator[](int power)
 {
-	struct Poly::node newNode;
+	Poly::node newNode;
 	newNode.power = power;
 	bool inserted = false;
 	int position = 0;
@@ -76,7 +74,7 @@ Poly operator+(const Poly& p1, const Poly& p2)
 			iter2++;
 		}
 		else {
-			result.polynomial = pushNode(result.polynomial,
+			result.polynomial = Poly::pushNode(result.polynomial,
 						 p2.polynomial[iter2].coef + p1.polynomial[iter1].coef,
 						 p2.polynomial[iter2].power);
 			iter1++;
@@ -97,12 +95,12 @@ Poly operator-(const Poly& p1, const Poly& p2)
 		}
 		else if (p1.polynomial[iter1].power < p2.polynomial[iter2].power) {
 			result.polynomial =
-				pushNode(result.polynomial, -p2.polynomial[iter2].coef,
+				Poly::pushNode(result.polynomial, -p2.polynomial[iter2].coef,
 						 p2.polynomial[iter2].power);
 			iter2++;
 		}
 		else {
-			result.polynomial = pushNode(result.polynomial,
+			result.polynomial = Poly::pushNode(result.polynomial,
 						 p1.polynomial[iter1].coef - p2.polynomial[iter2].coef,
 						 p1.polynomial[iter1].power);
 			iter1++;
