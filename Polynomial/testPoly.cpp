@@ -72,34 +72,4 @@ void testValue(const Poly& p1, const Poly& p2) {
 	cout << "Value of polynomial p1 at point 1.5: " << p1(1.5) << endl;
 	cout << "Value of polynomial p2 at point 2.3: " << p2(2.3) << endl;
 }
-/*
-int main()
-{
-	Poly p1;
-	p1[3] = 2;
-	p1[1] = 3.6;
-	p1[0] = 7;
-	Poly p2;
-	p2 = -p1;
-	Poly p1;
-	p1[0] = 1;
-	p1[1] = 2;
-	p1[2] = 3;
-	p1[6] = 7;
-	Poly p2;
-	p2[0] = 2;
-	p2[1] = 3;
-	p2[2] = 4;
-	p2[3] = 4;
-	p2[4] = 5;
-	//p2[5] = 6;
-	Poly p3;
-	p3 = p2 - p1;
-	cout << p1 << endl;
-	for (Poly::node i : p3.polynomial) {
-		cout << i.coef << "  ";
-	}
-	cout << endl;
-	cout << p1(1.5);
-	return 0;
-}*/
+

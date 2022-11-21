@@ -17,6 +17,7 @@ vector<Poly::node> pushNode(vector<Poly::node> vect, double coef, int power)
 	vect.push_back(newNode);
 	return vect;
 }
+
 double& Poly::operator[](int power)
 {
 	struct Poly::node newNode;
