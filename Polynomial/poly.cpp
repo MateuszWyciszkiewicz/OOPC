@@ -9,7 +9,7 @@ Poly::Poly(double coef)
 	polynomial.push_back(newNode);
 }
 
-vector<Poly::node> pushNode(vector<Poly::node> vect, double coef, int power)
+vector<Poly::node>& pushNode(vector<Poly::node>& vect, double coef, int power)
 {
 	Poly::node newNode;
 	newNode.power = power;
