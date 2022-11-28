@@ -10,12 +10,12 @@ Matrix::matrixData::matrixData(size_t rows, size_t columns)
 {
 	this->rows = rows;
 	this->columns = columns;
-	this->matrix = (double**)malloc(this->rows * sizeof(double*));
+	this->matrix = new double*[rows];
 	if (this->matrix == NULL) {
 		abort();
 	}
 	for (size_t i = 0; i < this->rows; i++) {
-		this->matrix[i] = (double*)malloc(this->columns * sizeof(double));
+		this->matrix[i] = new double[columns];
 		if (this->matrix[i] == NULL) {
 			abort();
 		}
@@ -70,6 +70,7 @@ MatrixRef::MatrixRef(Matrix* matrix, size_t rows, size_t columns){
 MatrixRef::operator double() const {
     return this -> matrix -> read(this -> rows, this -> columns);
     }
+    
 Matrix::~Matrix()
 {
 	if (--this->data->refCount == 0) {
@@ -79,7 +80,7 @@ Matrix::~Matrix()
 Matrix::matrixData::~matrixData()
 {
 	for (size_t i = 0; i < this->rows; i++) {
-		free(this->matrix[i]);
+		delete[] this->matrix[i];
 	}
-	free(this->matrix);
+	delete[] this->matrix;
 }
