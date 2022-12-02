@@ -1,11 +1,13 @@
 #pragma once
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
 class MatrixRef;
 class InvalidIndexException {};
 class InvalidMatrixSizeException{};
+class InvalidFileException {};
 
 class Matrix {
   private:
@@ -19,6 +21,7 @@ class Matrix {
 	friend class MatrixRef;
 	Matrix(size_t rows, size_t columns);
 	Matrix(const Matrix& base);
+    Matrix(string filename);
 	~Matrix();
     
 	MatrixRef operator()(size_t rowIndex, size_t columnIndex);
@@ -36,6 +39,7 @@ class Matrix {
    // Matrix& operator*=(const Matrix& m);
    
    friend Matrix operator+(const Matrix& m1, const Matrix& m2);
+   friend Matrix operator-(const Matrix& m1, const Matrix& m2);
 };
 
 struct Matrix::matrixData {

@@ -7,6 +7,7 @@ void testDisplay();
 void testCompoundAddition();
 void testCompoundSubstraction();
 void testRegularAddition();
+void testRegularSubstraction();
 
 int main()
 {
@@ -26,6 +27,9 @@ int main()
     testCompoundAddition();
     testCompoundSubstraction();
     testRegularAddition();
+    testRegularSubstraction();
+    Matrix m4("matrix.txt");
+    cout << m4 << endl;
 	return 0;
 }
 
@@ -153,3 +157,25 @@ void testRegularAddition(){
 		cout << "regular addition test successful" << endl;
 	}
     }
+    
+void testRegularSubstraction()
+{
+	Matrix m1(2, 2);
+	Matrix m2(2, 2);
+	Matrix m3(2, 2);
+	m1(1, 1) = 1;
+	m1(1, 2) = 1;
+	m1(2, 1) = 1;
+	m1(2, 2) = 1;
+	m2(1, 1) = 1;
+	m2(1, 2) = 1;
+	m2(2, 1) = 1;
+	m2(2, 2) = 1;
+	Matrix m4 = m1 - m2;
+	if (m4 == m3) {
+		cout << "regular substraction test successful" << endl;
+	}
+	else {
+		cout << "regular substraction test successful" << endl;
+	}
+}

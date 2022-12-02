@@ -21,6 +21,40 @@ Matrix::Matrix(const Matrix& base)
 	this->data = base.data;
 }
 
+Matrix::Matrix(string fileName)
+{
+	ifstream file;
+	size_t rows, columns;
+	file.open(fileName);
+	if (!file.good()) {
+		throw new InvalidFileException();
+	}
+	if (!file.eof()) {
+		file >> rows;
+		file >> columns;
+		if (file.fail() && !file.eof()) {
+			file.close();
+			throw InvalidFileException();
+		}
+	}
+	this->data = new matrixData(rows, columns);
+
+	for (size_t i = 1; i <= rows; i++) {
+		for (size_t j = 1; j <= columns; j++) {
+			if (file.eof()) {
+				file.close();
+				throw InvalidFileException();
+			}
+            file >> this -> data -> matrix[i][j];
+            if (!file.eof() && file.fail()) {
+			file.close();
+			throw InvalidFileException();
+		}
+		}
+	}
+	file.close();
+}
+
 Matrix::matrixData* Matrix::matrixData::detach()
 {
 	if (refCount == 1) {
@@ -37,17 +71,19 @@ Matrix::matrixData* Matrix::matrixData::detach()
 
 const double Matrix::read(size_t rowIndex, size_t columnIndex) const
 {
-      if(this->data -> rows < rowIndex || this->data -> columns < columnIndex || rowIndex < 0 || columnIndex < 0){
-        throw new InvalidMatrixSizeException;
-        }
+	if (this->data->rows < rowIndex || this->data->columns < columnIndex ||
+		rowIndex < 0 || columnIndex < 0) {
+		throw new InvalidMatrixSizeException;
+	}
 	return this->data->matrix[rowIndex][columnIndex];
 }
 
 void Matrix::write(size_t rowIndex, size_t columnIndex, double num)
 {
-    if(this->data -> rows < rowIndex || this->data -> columns < columnIndex || rowIndex < 0 || columnIndex < 0){
-        throw new InvalidMatrixSizeException;
-        }
+	if (this->data->rows < rowIndex || this->data->columns < columnIndex ||
+		rowIndex < 0 || columnIndex < 0) {
+		throw new InvalidMatrixSizeException;
+	}
 	this->data = this->data->detach();
 	this->data->matrix[rowIndex][columnIndex] = num;
 }
@@ -126,64 +162,85 @@ Matrix Matrix::operator=(const Matrix& base)
 	return *this;
 }
 
-ostream& operator <<(ostream& out, const Matrix& m){
-    for (size_t i = 1; i <= m.data->rows; i++) {
+ostream& operator<<(ostream& out, const Matrix& m)
+{
+	for (size_t i = 1; i <= m.data->rows; i++) {
 		for (size_t j = 1; j <= m.data->columns; j++) {
-				out << m(i, j);
-                out << "  ";
-          
+			out << m(i, j);
+			out << "  ";
 		}
-          out << "\n";
+		out << "\n";
 	}
-    return out;
-    }
+	return out;
+}
 
-Matrix& Matrix::operator+=(const Matrix& m){
-    if (this -> data -> columns != m.data->columns || this -> data -> rows != m.data->rows){
-        throw new InvalidMatrixSizeException();
-        }
-    for (size_t i = 1; i <= this->data->rows; i++) {
+Matrix& Matrix::operator+=(const Matrix& m)
+{
+	if (this->data->columns != m.data->columns ||
+		this->data->rows != m.data->rows) {
+		throw new InvalidMatrixSizeException();
+	}
+	for (size_t i = 1; i <= this->data->rows; i++) {
 		for (size_t j = 1; j <= this->data->columns; j++) {
-			this -> data -> matrix[i-1][j-1] += m(i, j);
+			this->data->matrix[i - 1][j - 1] += m(i, j);
 		}
 	}
-    return *this;
-    }
-    
-Matrix& Matrix::operator-=(const Matrix& m){
-    if (this -> data -> columns != m.data->columns || this -> data -> rows != m.data->rows){
-        throw new InvalidMatrixSizeException();
-        }
-    for (size_t i = 1; i <= this->data->rows; i++) {
+	return *this;
+}
+
+Matrix& Matrix::operator-=(const Matrix& m)
+{
+	if (this->data->columns != m.data->columns ||
+		this->data->rows != m.data->rows) {
+		throw new InvalidMatrixSizeException();
+	}
+	for (size_t i = 1; i <= this->data->rows; i++) {
 		for (size_t j = 1; j <= this->data->columns; j++) {
-			this -> data -> matrix[i-1][j-1] -= m(i, j);
+			this->data->matrix[i - 1][j - 1] -= m(i, j);
 		}
 	}
-    return *this;
-    }
+	return *this;
+}
 /*
 Matrix& Matrix::operator*=(const Matrix& m){
-    if (this -> data -> columns != m.data->rows){
-        throw new InvalidMatrixSizeException();
-        }
-    for (size_t i = 1; i <= this->data->rows; i++) {
+	if (this -> data -> columns != m.data->rows){
+		throw new InvalidMatrixSizeException();
+		}
+	for (size_t i = 1; i <= this->data->rows; i++) {
 		for (size_t j = 1; j <= this->data->columns; j++) {
 			this -> data -> matrix[i-1][j-1] -= m(i, j);
 		}
 	}
-    return *this;
-    }
-    * */
-    
-Matrix operator+(const Matrix& m1, const Matrix& m2){
-    if (m1.data -> columns != m2.data->columns || m1.data -> rows != m2.data->rows){
-        throw new InvalidMatrixSizeException();
-        }
-    Matrix result(m1.data -> columns, m1.data -> rows);
-     for (size_t i = 1; i <= m1.data->rows; i++) {
+	return *this;
+	}
+	* */
+
+Matrix operator+(const Matrix& m1, const Matrix& m2)
+{
+	if (m1.data->columns != m2.data->columns ||
+		m1.data->rows != m2.data->rows) {
+		throw new InvalidMatrixSizeException();
+	}
+	Matrix result(m1.data->columns, m1.data->rows);
+	for (size_t i = 1; i <= m1.data->rows; i++) {
 		for (size_t j = 1; j <= m1.data->columns; j++) {
 			result(i, j) = m1(i, j) + m2(i, j);
 		}
 	}
-    return result;
-    }
+	return result;
+}
+
+Matrix operator-(const Matrix& m1, const Matrix& m2)
+{
+	if (m1.data->columns != m2.data->columns ||
+		m1.data->rows != m2.data->rows) {
+		throw new InvalidMatrixSizeException();
+	}
+	Matrix result(m1.data->columns, m1.data->rows);
+	for (size_t i = 1; i <= m1.data->rows; i++) {
+		for (size_t j = 1; j <= m1.data->columns; j++) {
+			result(i, j) = m1(i, j) - m2(i, j);
+		}
+	}
+	return result;
+}
