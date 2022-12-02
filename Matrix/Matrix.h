@@ -32,6 +32,7 @@ class Matrix {
     friend ostream& operator <<(ostream& out, const Matrix& m);
     
     Matrix& operator+=(const Matrix& m);
+    Matrix& operator-=(const Matrix& m);
 };
 
 struct Matrix::matrixData {

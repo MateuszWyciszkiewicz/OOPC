@@ -139,9 +139,24 @@ ostream& operator <<(ostream& out, const Matrix& m){
     }
 
 Matrix& Matrix::operator+=(const Matrix& m){
+    if (this -> data -> columns != m.data->columns || this -> data -> rows != m.data->rows){
+        throw new InvalidMatrixSizeException();
+        }
     for (size_t i = 1; i <= this->data->rows; i++) {
 		for (size_t j = 1; j <= this->data->columns; j++) {
-			this -> data -> matrix[i][j] += m(i, j);
+			this -> data -> matrix[i-1][j-1] += m(i, j);
+		}
+	}
+    return *this;
+    }
+    
+Matrix& Matrix::operator-=(const Matrix& m){
+    if (this -> data -> columns != m.data->columns || this -> data -> rows != m.data->rows){
+        throw new InvalidMatrixSizeException();
+        }
+    for (size_t i = 1; i <= this->data->rows; i++) {
+		for (size_t j = 1; j <= this->data->columns; j++) {
+			this -> data -> matrix[i-1][j-1] -= m(i, j);
 		}
 	}
     return *this;
