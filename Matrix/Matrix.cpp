@@ -11,14 +11,8 @@ Matrix::matrixData::matrixData(size_t rows, size_t columns)
 	this->rows = rows;
 	this->columns = columns;
 	this->matrix = new double*[rows];
-	if (this->matrix == NULL) {
-		abort();
-	}
 	for (size_t i = 0; i < this->rows; i++) {
 		this->matrix[i] = new double[columns];
-		if (this->matrix[i] == NULL) {
-			abort();
-		}
 	}
 	this->refCount = 1;
 }

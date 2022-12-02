@@ -30,7 +30,7 @@ struct Matrix::matrixData {
 	size_t columns;
 	double** matrix;
 
-	matrixData(size_t rwos, size_t columns);
+	matrixData(size_t rows, size_t columns);
 	~matrixData();
 	matrixData* detach();
 };
