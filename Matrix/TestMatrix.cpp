@@ -6,6 +6,7 @@ void assignmentOperatorTest();
 void testDisplay();
 void testCompoundAddition();
 void testCompoundSubstraction();
+void testRegularAddition();
 
 int main()
 {
@@ -24,6 +25,7 @@ int main()
 	testDisplay();
     testCompoundAddition();
     testCompoundSubstraction();
+    testRegularAddition();
 	return 0;
 }
 
@@ -126,3 +128,28 @@ void testCompoundSubstraction()
 		cout << "compound substraction test successful" << endl;
 	}
 }
+
+void testRegularAddition(){
+    Matrix m1(2, 2);
+	Matrix m2(2, 2);
+	Matrix m3(2, 2);
+	m1(1, 1) = 1;
+	m1(1, 2) = 1;
+	m1(2, 1) = 1;
+	m1(2, 2) = 1;
+	m2(1, 1) = 1;
+	m2(1, 2) = 1;
+	m2(2, 1) = 1;
+	m2(2, 2) = 1;
+	m3(1, 1) = 2;
+	m3(1, 2) = 2;
+	m3(2, 1) = 2;
+	m3(2, 2) = 2;
+	Matrix m4 = m1 + m2;
+	if (m4 == m3) {
+		cout << "regular addition test successful" << endl;
+	}
+	else {
+		cout << "regular addition test successful" << endl;
+	}
+    }

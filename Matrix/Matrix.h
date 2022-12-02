@@ -33,6 +33,9 @@ class Matrix {
     
     Matrix& operator+=(const Matrix& m);
     Matrix& operator-=(const Matrix& m);
+   // Matrix& operator*=(const Matrix& m);
+   
+   friend Matrix operator+(const Matrix& m1, const Matrix& m2);
 };
 
 struct Matrix::matrixData {

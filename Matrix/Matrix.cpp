@@ -161,3 +161,29 @@ Matrix& Matrix::operator-=(const Matrix& m){
 	}
     return *this;
     }
+/*
+Matrix& Matrix::operator*=(const Matrix& m){
+    if (this -> data -> columns != m.data->rows){
+        throw new InvalidMatrixSizeException();
+        }
+    for (size_t i = 1; i <= this->data->rows; i++) {
+		for (size_t j = 1; j <= this->data->columns; j++) {
+			this -> data -> matrix[i-1][j-1] -= m(i, j);
+		}
+	}
+    return *this;
+    }
+    * */
+    
+Matrix operator+(const Matrix& m1, const Matrix& m2){
+    if (m1.data -> columns != m2.data->columns || m1.data -> rows != m2.data->rows){
+        throw new InvalidMatrixSizeException();
+        }
+    Matrix result(m1.data -> columns, m1.data -> rows);
+     for (size_t i = 1; i <= m1.data->rows; i++) {
+		for (size_t j = 1; j <= m1.data->columns; j++) {
+			result(i, j) = m1(i, j) + m2(i, j);
+		}
+	}
+    return result;
+    }
