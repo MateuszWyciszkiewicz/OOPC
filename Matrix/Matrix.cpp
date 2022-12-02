@@ -78,3 +78,22 @@ Matrix::matrixData::~matrixData()
 	}
 	delete[] this->matrix;
 }
+
+bool operator==(const Matrix& m1, const Matrix& m2){
+        if (m1.data->columns != m2.data->columns || m1.data->rows != m2.data->rows){
+            return false;
+            }
+            for (size_t i =1; i <= m1.data->rows; i++) {
+                for (size_t j =1; j <= m1.data->columns; j++) {
+                    if(m1(i, j) != m2(i, j)){
+                        return false;
+                        }
+                }
+                }
+                return true;
+        
+    }
+    
+bool operator!=(const Matrix& m1, const Matrix& m2){
+    return !(m1 == m2);
+    }

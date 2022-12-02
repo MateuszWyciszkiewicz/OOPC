@@ -22,6 +22,9 @@ class Matrix {
 
 	MatrixRef operator()(size_t rows, size_t columns);
 	const double operator()(size_t rows, size_t columns) const;
+    
+    friend bool operator==(const Matrix& m1, const Matrix& m2);
+    friend bool operator!=(const Matrix& m1, const Matrix& m2);
 };
 
 struct Matrix::matrixData {
