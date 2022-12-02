@@ -11,7 +11,7 @@ Matrix::matrixData::matrixData(size_t rows, size_t columns)
 	this->columns = columns;
 	this->matrix = new double*[rows];
 	for (size_t i = 0; i < this->rows; i++) {
-		this->matrix[i] = new double[columns];
+		this->matrix[i] = new double[columns]();
 	}
 	this->refCount = 1;
 }
@@ -35,15 +35,21 @@ Matrix::matrixData* Matrix::matrixData::detach()
 	return newMatrix;
 }
 
-const double Matrix::read(size_t rows, size_t columns) const
+const double Matrix::read(size_t rowIndex, size_t columnIndex) const
 {
-	return this->data->matrix[rows][columns];
+      if(this->data -> rows < rowIndex || this->data -> columns < columnIndex || rowIndex < 0 || columnIndex < 0){
+        throw new InvalidMatrixSizeException;
+        }
+	return this->data->matrix[rowIndex][columnIndex];
 }
 
-void Matrix::write(size_t rows, size_t columns, double num)
+void Matrix::write(size_t rowIndex, size_t columnIndex, double num)
 {
+    if(this->data -> rows < rowIndex || this->data -> columns < columnIndex || rowIndex < 0 || columnIndex < 0){
+        throw new InvalidMatrixSizeException;
+        }
 	this->data = this->data->detach();
-	this->data->matrix[rows][columns] = num;
+	this->data->matrix[rowIndex][columnIndex] = num;
 }
 
 void MatrixRef::operator=(double num)
@@ -119,3 +125,24 @@ Matrix Matrix::operator=(const Matrix& base)
 	}
 	return *this;
 }
+
+ostream& operator <<(ostream& out, const Matrix& m){
+    for (size_t i = 1; i <= m.data->rows; i++) {
+		for (size_t j = 1; j <= m.data->columns; j++) {
+				out << m(i, j);
+                out << "  ";
+          
+		}
+          out << "\n";
+	}
+    return out;
+    }
+
+Matrix& Matrix::operator+=(const Matrix& m){
+    for (size_t i = 1; i <= this->data->rows; i++) {
+		for (size_t j = 1; j <= this->data->columns; j++) {
+			this -> data -> matrix[i][j] += m(i, j);
+		}
+	}
+    return *this;
+    }

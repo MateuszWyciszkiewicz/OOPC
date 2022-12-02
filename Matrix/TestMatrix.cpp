@@ -3,6 +3,7 @@
 void testEqualityAndInequality();
 void copyConstructorTest();
 void assignmentOperatorTest();
+void testDisplay();
 
 int main()
 {
@@ -18,6 +19,7 @@ int main()
     copyConstructorTest();
     assignmentOperatorTest();
 	testEqualityAndInequality();
+    testDisplay();
 	return 0;
 }
 
@@ -60,3 +62,12 @@ void testEqualityAndInequality()
 		cout << "equality/inequality test failed" << endl;
 	}
 }
+
+void testDisplay(){
+    Matrix m(5, 5);
+    m(1, 1) = 4;
+    m(1, 2) = 4;
+    m(2, 5) = 5;
+    cout << "display test:" << endl;
+    cout << m << endl;
+    }
