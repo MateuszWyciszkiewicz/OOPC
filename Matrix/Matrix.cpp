@@ -52,7 +52,7 @@ const double Matrix::operator()(size_t rows, size_t columns) const{
     }
 
 MatrixRef Matrix::operator ()(size_t rows, size_t columns){
-    return MatrixRef(this, rows, columns);
+    return MatrixRef(this, rows-1, columns-1);
     }
     
 MatrixRef::MatrixRef(Matrix* matrix, size_t rows, size_t columns){
