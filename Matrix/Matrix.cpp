@@ -27,7 +27,7 @@ Matrix::Matrix(string fileName)
 	size_t rows, columns;
 	file.open(fileName);
 	if (!file.good()) {
-		throw new InvalidFileException();
+		throw InvalidFileException();
 	}
 	if (!file.eof()) {
 		file >> rows;
@@ -38,20 +38,24 @@ Matrix::Matrix(string fileName)
 		}
 	}
 	this->data = new matrixData(rows, columns);
-
-	for (size_t i = 1; i <= rows; i++) {
-		for (size_t j = 1; j <= columns; j++) {
+	string input;
+	for (size_t i = 0; i < rows; i++) {
+		for (size_t j = 0; j < columns; j++) {
 			if (file.eof()) {
 				file.close();
 				throw InvalidFileException();
 			}
-            file >> this -> data -> matrix[i][j];
-            if (!file.eof() && file.fail()) {
-			file.close();
-			throw InvalidFileException();
-		}
+			file >> input;
+			this->data->matrix[i][j] = stod(input);
+			if (!file.eof() && file.fail()) {
+				file.close();
+				throw InvalidFileException();
+			}
 		}
 	}
+	this->data->rows = rows;
+	this->data->columns = columns;
+
 	file.close();
 }
 
@@ -71,19 +75,11 @@ Matrix::matrixData* Matrix::matrixData::detach()
 
 const double Matrix::read(size_t rowIndex, size_t columnIndex) const
 {
-	if (this->data->rows < rowIndex || this->data->columns < columnIndex ||
-		rowIndex < 0 || columnIndex < 0) {
-		throw new InvalidMatrixSizeException;
-	}
 	return this->data->matrix[rowIndex][columnIndex];
 }
 
 void Matrix::write(size_t rowIndex, size_t columnIndex, double num)
 {
-	if (this->data->rows < rowIndex || this->data->columns < columnIndex ||
-		rowIndex < 0 || columnIndex < 0) {
-		throw new InvalidMatrixSizeException;
-	}
 	this->data = this->data->detach();
 	this->data->matrix[rowIndex][columnIndex] = num;
 }
@@ -93,14 +89,22 @@ void MatrixRef::operator=(double num)
 	return this->matrix->write(this->rows, this->columns, num);
 }
 
-const double Matrix::operator()(size_t rows, size_t columns) const
+const double Matrix::operator()(size_t rowIndex, size_t columnIndex) const
 {
-	return this->read(rows - 1, columns - 1);
+	if (this->data->rows < rowIndex || this->data->columns < columnIndex ||
+		rowIndex < 0 || columnIndex < 0) {
+		throw InvalidIndexException();
+	}
+	return this->read(rowIndex - 1, columnIndex - 1);
 }
 
-MatrixRef Matrix::operator()(size_t rows, size_t columns)
+MatrixRef Matrix::operator()(size_t rowIndex, size_t columnIndex)
 {
-	return MatrixRef(this, rows - 1, columns - 1);
+	if (this->data->rows < rowIndex || this->data->columns < columnIndex ||
+		rowIndex < 0 || columnIndex < 0) {
+		throw InvalidIndexException();
+	}
+	return MatrixRef(this, rowIndex - 1, columnIndex - 1);
 }
 
 MatrixRef::MatrixRef(Matrix* matrix, size_t rows, size_t columns)
@@ -178,7 +182,7 @@ Matrix& Matrix::operator+=(const Matrix& m)
 {
 	if (this->data->columns != m.data->columns ||
 		this->data->rows != m.data->rows) {
-		throw new InvalidMatrixSizeException();
+		throw InvalidMatrixSizeException();
 	}
 	for (size_t i = 1; i <= this->data->rows; i++) {
 		for (size_t j = 1; j <= this->data->columns; j++) {
@@ -192,7 +196,7 @@ Matrix& Matrix::operator-=(const Matrix& m)
 {
 	if (this->data->columns != m.data->columns ||
 		this->data->rows != m.data->rows) {
-		throw new InvalidMatrixSizeException();
+		throw InvalidMatrixSizeException();
 	}
 	for (size_t i = 1; i <= this->data->rows; i++) {
 		for (size_t j = 1; j <= this->data->columns; j++) {
@@ -219,7 +223,7 @@ Matrix operator+(const Matrix& m1, const Matrix& m2)
 {
 	if (m1.data->columns != m2.data->columns ||
 		m1.data->rows != m2.data->rows) {
-		throw new InvalidMatrixSizeException();
+		throw InvalidMatrixSizeException();
 	}
 	Matrix result(m1.data->columns, m1.data->rows);
 	for (size_t i = 1; i <= m1.data->rows; i++) {
@@ -234,7 +238,7 @@ Matrix operator-(const Matrix& m1, const Matrix& m2)
 {
 	if (m1.data->columns != m2.data->columns ||
 		m1.data->rows != m2.data->rows) {
-		throw new InvalidMatrixSizeException();
+		throw InvalidMatrixSizeException();
 	}
 	Matrix result(m1.data->columns, m1.data->rows);
 	for (size_t i = 1; i <= m1.data->rows; i++) {

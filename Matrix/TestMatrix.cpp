@@ -8,6 +8,8 @@ void testCompoundAddition();
 void testCompoundSubstraction();
 void testRegularAddition();
 void testRegularSubstraction();
+void testInvlidIndexException();
+void testIncalidFileException();
 
 int main()
 {
@@ -24,12 +26,14 @@ int main()
 	assignmentOperatorTest();
 	testEqualityAndInequality();
 	testDisplay();
-    testCompoundAddition();
-    testCompoundSubstraction();
-    testRegularAddition();
-    testRegularSubstraction();
-    Matrix m4("matrix.txt");
-    cout << m4 << endl;
+	testCompoundAddition();
+	testCompoundSubstraction();
+	testRegularAddition();
+	testRegularSubstraction();
+	testInvlidIndexException();
+    testIncalidFileException();
+	Matrix m4("matrix.txt");
+	cout << m4 << endl;
 	return 0;
 }
 
@@ -133,8 +137,9 @@ void testCompoundSubstraction()
 	}
 }
 
-void testRegularAddition(){
-    Matrix m1(2, 2);
+void testRegularAddition()
+{
+	Matrix m1(2, 2);
 	Matrix m2(2, 2);
 	Matrix m3(2, 2);
 	m1(1, 1) = 1;
@@ -156,8 +161,8 @@ void testRegularAddition(){
 	else {
 		cout << "regular addition test successful" << endl;
 	}
-    }
-    
+}
+
 void testRegularSubstraction()
 {
 	Matrix m1(2, 2);
@@ -178,4 +183,29 @@ void testRegularSubstraction()
 	else {
 		cout << "regular substraction test successful" << endl;
 	}
+}
+
+void testInvlidIndexException()
+{
+	Matrix m(2, 2);
+	try {
+		m(3, 3);
+	}
+	catch (InvalidIndexException e) {
+		cout << "InvalidIndexException test successful" << endl;
+		return;
+	}
+	cout << "InvalidIndexException test failed" << endl;
+}
+
+void testIncalidFileException()
+{
+	try {
+		Matrix m("wrongFile.txt");
+	}
+	catch (InvalidFileException e) {
+		cout << "InvalidFileException test successful" << endl;
+		return;
+	}
+	cout << "InvalidFileException test failed" << endl;
 }
