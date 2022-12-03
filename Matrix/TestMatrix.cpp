@@ -9,7 +9,9 @@ void testCompoundSubstraction();
 void testRegularAddition();
 void testRegularSubstraction();
 void testInvlidIndexException();
-void testIncalidFileException();
+void testInvalidFileNameException();
+void testInvalidFileException();
+void testInvalidMatrixSizeException();
 
 int main()
 {
@@ -31,9 +33,10 @@ int main()
 	testRegularAddition();
 	testRegularSubstraction();
 	testInvlidIndexException();
-    testIncalidFileException();
-	Matrix m4("matrix.txt");
-	cout << m4 << endl;
+    testInvalidFileNameException();
+    testInvalidFileException();
+    testInvalidMatrixSizeException();
+//	cout << m4 << endl;
 	return 0;
 }
 
@@ -198,10 +201,22 @@ void testInvlidIndexException()
 	cout << "InvalidIndexException test failed" << endl;
 }
 
-void testIncalidFileException()
+void testInvalidFileNameException()
 {
 	try {
 		Matrix m("wrongFile.txt");
+	}
+	catch (InvalidFileNameException e) {
+		cout << "InvalidFileNameException test successful" << endl;
+		return;
+	}
+	cout << "InvalidFileNameException test failed" << endl;
+}
+
+void testInvalidFileException()
+{
+	try {
+		Matrix m("wrongMatrix.txt");
 	}
 	catch (InvalidFileException e) {
 		cout << "InvalidFileException test successful" << endl;
@@ -209,3 +224,15 @@ void testIncalidFileException()
 	}
 	cout << "InvalidFileException test failed" << endl;
 }
+
+void testInvalidMatrixSizeException(){
+    Matrix m1(2, 3);
+    Matrix m2(1, 1);
+    try {
+        m1 + m2;
+        } catch(InvalidMatrixSizeException e){
+            cout << "InvalidMatrixSizeException test successful" << endl;
+            return;
+            }
+            cout << "InvalidMatrixSizeException test failed" << endl;
+    }

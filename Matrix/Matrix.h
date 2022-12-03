@@ -8,6 +8,7 @@ class MatrixRef;
 class InvalidIndexException {};
 class InvalidMatrixSizeException{};
 class InvalidFileException {};
+class InvalidFileNameException {};
 
 class Matrix {
   private:

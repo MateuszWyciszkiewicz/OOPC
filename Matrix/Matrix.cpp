@@ -27,7 +27,7 @@ Matrix::Matrix(string fileName)
 	size_t rows, columns;
 	file.open(fileName);
 	if (!file.good()) {
-		throw InvalidFileException();
+		throw InvalidFileNameException();
 	}
 	if (!file.eof()) {
 		file >> rows;
