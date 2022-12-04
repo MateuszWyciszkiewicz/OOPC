@@ -17,9 +17,12 @@ class Matrix {
 
 	const double read(size_t rows, size_t columns) const;
 	void write(size_t rows, size_t columns, double num);
-
+    
+    static Matrix multiplyMatrixByConst(const Matrix &m, double value);
+    static Matrix multiplyMatrixByMatrix(const Matrix &m1, const Matrix &m2);
   public:
 	friend class MatrixRef;
+    Matrix(double num);
 	Matrix(size_t rows, size_t columns);
 	Matrix(const Matrix& base);
     Matrix(string filename);
@@ -37,10 +40,11 @@ class Matrix {
     
     Matrix& operator+=(const Matrix& m);
     Matrix& operator-=(const Matrix& m);
-   // Matrix& operator*=(const Matrix& m);
+    Matrix& operator*=(const Matrix& m);
    
    friend Matrix operator+(const Matrix& m1, const Matrix& m2);
    friend Matrix operator-(const Matrix& m1, const Matrix& m2);
+   friend Matrix operator*(const Matrix &m1, const Matrix &m2);
 };
 
 struct Matrix::matrixData {

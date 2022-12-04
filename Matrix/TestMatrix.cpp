@@ -12,31 +12,29 @@ void testInvlidIndexException();
 void testInvalidFileNameException();
 void testInvalidFileException();
 void testInvalidMatrixSizeException();
+void testRegularMultiplication();
+void testMultiplyByConst();
+void testCompoundMultiplication();
+void testCompoundMultiplicationByConst();
 
 int main()
 {
-	Matrix m1(3, 3);
-	m1(2, 2) = 5;
-	double num = m1(2, 2);
-	Matrix m2(m1);
-	m2(1, 2) = 4;
-	bool n = m1 == m2;
-	cout << n << endl;
-	cout << num << endl;
-	cout << m1(2, 2) << endl;
 	copyConstructorTest();
 	assignmentOperatorTest();
 	testEqualityAndInequality();
-	testDisplay();
 	testCompoundAddition();
 	testCompoundSubstraction();
 	testRegularAddition();
 	testRegularSubstraction();
 	testInvlidIndexException();
-    testInvalidFileNameException();
-    testInvalidFileException();
-    testInvalidMatrixSizeException();
-//	cout << m4 << endl;
+	testInvalidFileNameException();
+	testInvalidFileException();
+	testInvalidMatrixSizeException();
+	testRegularMultiplication();
+	testMultiplyByConst();
+	testCompoundMultiplication();
+	testCompoundMultiplicationByConst();
+	testDisplay();
 	return 0;
 }
 
@@ -225,14 +223,119 @@ void testInvalidFileException()
 	cout << "InvalidFileException test failed" << endl;
 }
 
-void testInvalidMatrixSizeException(){
-    Matrix m1(2, 3);
-    Matrix m2(1, 1);
-    try {
-        m1 + m2;
-        } catch(InvalidMatrixSizeException e){
-            cout << "InvalidMatrixSizeException test successful" << endl;
-            return;
-            }
-            cout << "InvalidMatrixSizeException test failed" << endl;
-    }
+void testInvalidMatrixSizeException()
+{
+	Matrix m1(2, 3);
+	Matrix m2(1, 1);
+	try {
+		m1 + m2;
+	}
+	catch (InvalidMatrixSizeException e) {
+		cout << "InvalidMatrixSizeException test successful" << endl;
+		return;
+	}
+	cout << "InvalidMatrixSizeException test failed" << endl;
+}
+
+void testRegularMultiplication()
+{
+	Matrix m1(2, 3);
+	Matrix m2(3, 2);
+	Matrix m3(2, 2);
+	m1(1, 1) = 1;
+	m1(1, 2) = 2;
+	m1(1, 3) = 3;
+	m1(2, 1) = 1;
+	m1(2, 2) = 2;
+	m1(2, 3) = 3;
+	m2(1, 1) = 1;
+	m2(1, 2) = 1;
+	m2(2, 1) = 2;
+	m2(2, 2) = 2;
+	m2(3, 1) = 3;
+	m2(3, 2) = 3;
+	m3(1, 1) = 14;
+	m3(1, 2) = 14;
+	m3(2, 1) = 14;
+	m3(2, 2) = 14;
+	Matrix m4 = m1 * m2;
+	if (m4 == m3) {
+		cout << "regular multiplication test successful" << endl;
+	}
+	else {
+		cout << "regular multiplication test failed" << endl;
+	}
+}
+
+void testMultiplyByConst()
+{
+	Matrix m1(2, 2);
+	m1(1, 1) = 1;
+	m1(1, 2) = 1;
+	m1(2, 1) = 1;
+	m1(2, 2) = 1;
+	Matrix m2(2, 2);
+	m2(1, 1) = 2;
+	m2(1, 2) = 2;
+	m2(2, 1) = 2;
+	m2(2, 2) = 2;
+	Matrix m3 = 2 * m1;
+	Matrix m4 = m1 * 2;
+	if (m3 == m2 && m4 == m2) {
+		cout << "multiplying by constant test successful" << endl;
+	}
+	else {
+		cout << "multiplying by constant test failed" << endl;
+	}
+}
+
+void testCompoundMultiplication()
+{
+	Matrix m1(2, 3);
+	Matrix m2(3, 2);
+	Matrix m3(2, 2);
+	m1(1, 1) = 1;
+	m1(1, 2) = 2;
+	m1(1, 3) = 3;
+	m1(2, 1) = 1;
+	m1(2, 2) = 2;
+	m1(2, 3) = 3;
+	m2(1, 1) = 1;
+	m2(1, 2) = 1;
+	m2(2, 1) = 2;
+	m2(2, 2) = 2;
+	m2(3, 1) = 3;
+	m2(3, 2) = 3;
+	m3(1, 1) = 14;
+	m3(1, 2) = 14;
+	m3(2, 1) = 14;
+	m3(2, 2) = 14;
+	m1 *= m2;
+	if (m1 == m3) {
+		cout << "compound multiplication test successful" << endl;
+	}
+	else {
+		cout << "compound multiplication test failed" << endl;
+	}
+}
+
+void testCompoundMultiplicationByConst()
+{
+	Matrix m1(2, 2);
+	m1(1, 1) = 1;
+	m1(1, 2) = 1;
+	m1(2, 1) = 1;
+	m1(2, 2) = 1;
+	Matrix m2(2, 2);
+	m2(1, 1) = 2;
+	m2(1, 2) = 2;
+	m2(2, 1) = 2;
+	m2(2, 2) = 2;
+	m1 *= 2;
+	if (m1 == m2) {
+		cout << "compound multiplying by constant test successful" << endl;
+	}
+	else {
+		cout << "compound multiplying by constant test failed" << endl;
+	}
+}

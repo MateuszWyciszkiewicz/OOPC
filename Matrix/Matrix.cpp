@@ -1,5 +1,9 @@
 #include "Matrix.h"
 
+Matrix::Matrix (double num){
+    this->data = new matrixData(1, 1);
+    this->data->matrix[0][0] = num;
+    }
 Matrix::Matrix(size_t rows, size_t columns)
 {
 	this->data = new matrixData(rows, columns);
@@ -205,19 +209,50 @@ Matrix& Matrix::operator-=(const Matrix& m)
 	}
 	return *this;
 }
-/*
+
+Matrix Matrix::multiplyMatrixByMatrix(const Matrix &m1, const Matrix &m2) {
+  Matrix result(m1.data->rows, m2.data->columns);
+    double partialSum = 0;
+  for (size_t i = 1; i <= m1.data->rows; i++) {
+    for (size_t j = 1; j <= m2.data->columns; j++) {
+      for (size_t k = 1; k <= m1.data->columns; k++) {
+        partialSum += m1(i, k) * m2(k, j);
+      }
+      result(j, i) = partialSum;
+      partialSum = 0;
+    }
+  }
+  return result;
+}
+
+Matrix Matrix::multiplyMatrixByConst(const Matrix &m, double value) {
+  Matrix result(m.data->rows, m.data->columns);
+  for (size_t i = 1; i <= m.data->rows; i++) {
+    for (size_t j = 1; j <= m.data->columns; j++) {
+      result(i, j) = value * m(i, j);
+    }
+  }
+  return result;
+}
+
+
+Matrix operator*(const Matrix &m1, const Matrix &m2) {
+  if (m1.data->rows == 1 && m1.data->columns == 1) {
+    return Matrix::multiplyMatrixByConst(m2, m1(1, 1));
+  } else if (m2.data->rows == 1 && m2.data->columns == 1) {
+    return Matrix::multiplyMatrixByConst(m1, m2(1, 1));
+  } else {
+    if (m1.data->columns != m2.data->rows) {
+      throw InvalidMatrixSizeException();
+    }
+    return Matrix::multiplyMatrixByMatrix(m1, m2);
+  }
+}
+
 Matrix& Matrix::operator*=(const Matrix& m){
-	if (this -> data -> columns != m.data->rows){
-		throw new InvalidMatrixSizeException();
-		}
-	for (size_t i = 1; i <= this->data->rows; i++) {
-		for (size_t j = 1; j <= this->data->columns; j++) {
-			this -> data -> matrix[i-1][j-1] -= m(i, j);
-		}
+	*this = *this * m;
+    return *this;
 	}
-	return *this;
-	}
-	* */
 
 Matrix operator+(const Matrix& m1, const Matrix& m2)
 {
