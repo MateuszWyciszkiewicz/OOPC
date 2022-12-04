@@ -16,6 +16,8 @@ void testRegularMultiplication();
 void testMultiplyByConst();
 void testCompoundMultiplication();
 void testCompoundMultiplicationByConst();
+void testRefCount();
+void readWriteTest();
 
 int main()
 {
@@ -34,6 +36,8 @@ int main()
 	testMultiplyByConst();
 	testCompoundMultiplication();
 	testCompoundMultiplicationByConst();
+	testRefCount();
+    readWriteTest();
 	testDisplay();
 	return 0;
 }
@@ -339,3 +343,30 @@ void testCompoundMultiplicationByConst()
 		cout << "compound multiplying by constant test failed" << endl;
 	}
 }
+
+void testRefCount()
+{
+	Matrix m1(2, 2);
+	Matrix m2(2, 2);
+	m1(1, 2) = 5;
+	m1(1, 1) = 6;
+	m2 = m1;
+	Matrix m3(m1);
+	if (m1.getRefCount() == 3) {
+		cout << "reference counting test successful" << endl;
+	}
+	else {
+		cout << "reference counting test failed" << endl;
+	}
+}
+
+void readWriteTest(){
+    Matrix m1(2, 2);
+    double num = 5;
+    m1(1, 2) = num;
+    if (m1(1, 2) == num) {
+        cout << "read/write test successful" <<endl;
+        } else {
+            cout << "read/write test failed" << endl;
+            }
+    }

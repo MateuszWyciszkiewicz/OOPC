@@ -25,6 +25,10 @@ Matrix::Matrix(const Matrix& base)
 	this->data = base.data;
 }
 
+size_t Matrix::getRefCount(){
+    return this -> data -> refCount;
+    }
+
 Matrix::Matrix(string fileName)
 {
 	ifstream file;

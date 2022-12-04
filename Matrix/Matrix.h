@@ -28,6 +28,8 @@ class Matrix {
     Matrix(string filename);
 	~Matrix();
     
+    size_t getRefCount();
+    
 	MatrixRef operator()(size_t rowIndex, size_t columnIndex);
 	const double operator()(size_t rowIndex, size_t columnIndex) const;
     
