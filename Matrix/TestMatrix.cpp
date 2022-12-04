@@ -18,6 +18,7 @@ void testCompoundMultiplication();
 void testCompoundMultiplicationByConst();
 void testRefCount();
 void readWriteTest();
+void testReadingFromFile();
 
 int main()
 {
@@ -38,6 +39,7 @@ int main()
 	testCompoundMultiplicationByConst();
 	testRefCount();
     readWriteTest();
+    testReadingFromFile();
 	testDisplay();
 	return 0;
 }
@@ -370,3 +372,13 @@ void readWriteTest(){
             cout << "read/write test failed" << endl;
             }
     }
+
+void testReadingFromFile(){
+    Matrix m1("matrix.txt");
+    Matrix m2("matrix1.txt");
+    if (m1 == m2) {
+        cout << "reading from file test successful" << endl;
+        } else {
+            cout << "reading from file test faied" << endl;
+            }
+    } 
