@@ -118,7 +118,7 @@ void testCompoundAddition()
 		cout << "compound addition test successful" << endl;
 	}
 	else {
-		cout << "compound addition test successful" << endl;
+		cout << "compound addition test failed" << endl;
 	}
 }
 
@@ -135,12 +135,12 @@ void testCompoundSubstraction()
 	m2(1, 2) = 1;
 	m2(2, 1) = 1;
 	m2(2, 2) = 1;
-	m1 += m2;
+	m1 -= m2;
 	if (m1 == m3) {
 		cout << "compound substraction test successful" << endl;
 	}
 	else {
-		cout << "compound substraction test successful" << endl;
+		cout << "compound substraction test failed" << endl;
 	}
 }
 
@@ -166,7 +166,7 @@ void testRegularAddition()
 		cout << "regular addition test successful" << endl;
 	}
 	else {
-		cout << "regular addition test successful" << endl;
+		cout << "regular addition test failed" << endl;
 	}
 }
 
@@ -188,7 +188,7 @@ void testRegularSubstraction()
 		cout << "regular substraction test successful" << endl;
 	}
 	else {
-		cout << "regular substraction test successful" << endl;
+		cout << "regular substraction test failed" << endl;
 	}
 }
 
