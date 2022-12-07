@@ -115,6 +115,7 @@ void testCompoundAddition()
     m3(1, 2) = 5;
     m3(2, 1) = 7;
     m3(2, 2) = 5;
+    m1 += m2;
     /*Matrix m4(m1);
     cout << m4 << endl;
     cout << m1.getRefCount() << endl;
