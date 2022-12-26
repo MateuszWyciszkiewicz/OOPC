@@ -1,5 +1,6 @@
 #include "Employee.h" // Defines class Employee
 #include "Map.h"	  // Defines template Map<Key, Value>
+#include "Book.h"
 #include <iostream>
 
 typedef unsigned int ID;			// Identification number of employee
@@ -12,6 +13,7 @@ void modifyEmployees(Database& database);
 void specialCases(Database& database);
 void keyNotInBase(Database& database);
 void keyMultipletimes(Database& database);
+void libraryTest();
 
 int main()
 {
@@ -30,6 +32,7 @@ int main()
 	database = newDatabase; // Update original database
 
 	cout << "Database after the assignment:" << endl << database << endl;
+    libraryTest();
 	specialCases(database);
 };
 
@@ -84,3 +87,16 @@ void keyMultipletimes(Database& database)
 		cout << "key already in database, exception caught\n" << endl;
 	}
 }
+
+void libraryTest(){
+    cout << "library test\n" << endl;
+    typedef string author;
+    typedef Map<author, Book> Library;
+    
+    Library library;
+    library.add("H. P. Lovecraft", Book("Call of Cuthulhu", "SciFi", 215, "bookshelf")); 
+    library.add("J. R. R. Tolkien", Book("Hobbit", "Fantasy", 250, "bookshelf")); 
+    library.add("Edgar Allan Poe", Book("The Raven", "Fantasy", 130, "borrowed"));
+    library.add("Hazel Heald", Book("The Nightmares", "SciFi", 350, "borrowed")); 
+    cout << library << endl;
+    }
