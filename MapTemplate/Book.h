@@ -8,7 +8,7 @@ class Book {
 	string status;
 
   public:
-    Book(){};
+    Book() = default;
 	Book(string author, string category, int pages, string status)
 	{
 		this->author = author;

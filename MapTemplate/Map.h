@@ -14,7 +14,7 @@ template <class Key, class Value> class Map {
 	struct entry {
 		Key key;
 		Value value;
-        entry(){};
+        entry() = default;
 		entry(Key inKey, Value inValue)
 		{
 			key = inKey;

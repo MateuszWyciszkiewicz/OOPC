@@ -9,7 +9,7 @@ class Employee {
         string position;
         int age;
         
-        Employee(){};
+        Employee() = default;
         Employee(string name, string position, int age){
             this -> name = name;
             this -> position = position;
