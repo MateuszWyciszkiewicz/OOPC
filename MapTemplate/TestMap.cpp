@@ -94,9 +94,19 @@ void libraryTest(){
     typedef Map<author, Book> Library;
     
     Library library;
+    cout << "Initial library:" << endl;
     library.add("H. P. Lovecraft", Book("Call of Cuthulhu", "SciFi", 215, "bookshelf")); 
     library.add("J. R. R. Tolkien", Book("Hobbit", "Fantasy", 250, "bookshelf")); 
     library.add("Edgar Allan Poe", Book("The Raven", "Fantasy", 130, "borrowed"));
     library.add("Hazel Heald", Book("The Nightmares", "SciFi", 350, "borrowed")); 
+    
     cout << library << endl;
+    Library copyLibrary = library;
+    
+    cout << "Library after modifications:" << endl;
+    copyLibrary.add("Bjarne Stroustrup", Book("The C++ Programming Language", "Education", 1500, "borrowed"));
+    /*Book* bookPtr;
+    bookPtr = copyLibrary.find("Edgar Allan Poe");
+    bookPtr -> status = "bookshelf";*/
+    cout << copyLibrary<< endl;
     }

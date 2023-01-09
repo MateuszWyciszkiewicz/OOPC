@@ -5,9 +5,9 @@ class Book {
 	string author;
 	string category;
 	int pages;
-	string status;
 
   public:
+    string status;
     Book() = default;
 	Book(string author, string category, int pages, string status)
 	{
