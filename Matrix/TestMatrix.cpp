@@ -116,16 +116,6 @@ void testCompoundAddition()
     m3(2, 1) = 7;
     m3(2, 2) = 5;
     m1 += m2;
-    /*Matrix m4(m1);
-    cout << m4 << endl;
-    cout << m1.getRefCount() << endl;
-    cout << m2.getRefCount() << endl;
-    cout << m4.getRefCount() << endl;
-    m1 += m2;
-    cout << m4 << endl;
-    cout << m1.getRefCount() << endl;
-    cout << m2.getRefCount() << endl;
-    cout << m4.getRefCount() << endl;*/
     if (m1 == m3) {
         cout << "compound addition test successful" << endl;
     }
@@ -400,7 +390,7 @@ void testRefCount()
         return;
     }
     Matrix m4(3,3);
-    Matrix m5(m4);
+    Matrix m5 = m4;
     m4(3,3) = 6;
     if (!(m4.getRefCount() == 1 && m5.getRefCount() == 1)) {
         cout << "reference counting test failed" << endl;
